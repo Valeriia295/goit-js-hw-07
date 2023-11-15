@@ -21,6 +21,14 @@ const markup = galleryItems
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-function handleClick(event) {
+gallery.addEventListener("click", (event) => {
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
   event.preventDefault();
-}
+
+  const img = event.target.attributes["data-source"].value;
+  const instance = basicLightbox.create(`<img src=${img}>`);
+
+  instance.show();
+});
